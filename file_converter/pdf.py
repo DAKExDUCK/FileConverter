@@ -1,4 +1,4 @@
-import io
+from io import BytesIO
 
 from file_converter.types.document import Document
 
@@ -9,6 +9,6 @@ class PDF(Document):
     ]
     format = 'pdf'
 
-    def convert_to_docx() -> io.BytesIO: ...
-    # def convert_to_pngs() -> io.BytesIO: ...
+    def convert_to_docx() -> BytesIO: ...
+    # def convert_to_pngs() -> BytesIO: ...
     

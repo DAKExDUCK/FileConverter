@@ -1,4 +1,4 @@
-import io
+from io import BytesIO
 import subprocess
 
 from file_converter.utils.tmp_file_manager import TmpFileManager as TFM
@@ -7,13 +7,13 @@ from file_converter.utils.tmp_file_manager import TmpFileManager as TFM
 class Document:
     can_converts_to: list
     format: str
-    doc: io.BytesIO
+    doc: BytesIO
 
-    def __init__(self, bytes_or_path: str|io.BytesIO):
+    def __init__(self, bytes_or_path: str|BytesIO):
         if isinstance(bytes_or_path, str):
             with open(bytes_or_path, 'rb') as file:
-                self.doc = io.BytesIO(file.read())
-        elif isinstance(bytes_or_path, io.BytesIO):
+                self.doc = BytesIO(file.read())
+        elif isinstance(bytes_or_path, BytesIO):
             self.doc = bytes_or_path
         else:
             raise ValueError("Invalid file type, it must be filepath or BytesIO")
@@ -26,7 +26,7 @@ class Document:
             setattr(self, conversion_func_name, self._create_conversion_func(conversion_type))
 
     def _create_conversion_func(self, conversion_type):
-        def conversion_func():
+        def conversion_func() -> BytesIO:
             filepath = TFM.write_tmp_file(self.doc, self.format)
             outdir = filepath.split('.')[0]
             cmd = ['soffice', '--headless', '--convert-to', conversion_type, '--outdir', outdir, filepath]
@@ -39,20 +39,23 @@ class Document:
                 raise "Error while converting file"
 
             with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+conversion_type, 'rb') as tmp_file:
-                return io.BytesIO(tmp_file.read())
+                return BytesIO(tmp_file.read())
         return conversion_func
 
-    def _convert(self, filepath:str, outdir:str, format:str):
+    def _convert(self, filepath:str, outdir:str, format:str) -> BytesIO:
         cmd = ['soffice', '--headless', '--convert-to', format, '--outdir', outdir, filepath]
-        return subprocess.run(
+        result = subprocess.run(
             cmd,
             stderr=subprocess.PIPE,
             stdout=subprocess.PIPE
         )
-        # with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
-            # return io.BytesIO(tmp_file.read())
+        if result.stderr != b'':
+            raise "Error while converting file"
+        
+        with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
+            return BytesIO(tmp_file.read())
 
-    def convert_to(self, format:str):
+    def convert_to(self, format:str) -> BytesIO:
         format = format.lower()
         # if format not in self.can_converts_to:
             # raise ValueError("Invalid format type")

@@ -1,4 +1,4 @@
-import io
+from io import BytesIO
 
 from file_converter.types.image import Img, Imgs
 
@@ -9,8 +9,8 @@ class PNG(Img):
         'jpg'
     ]
 
-    def convert_to_pdf() -> io.BytesIO: ...
-    def convert_to_jpg() -> io.BytesIO: ...
+    def convert_to_pdf() -> BytesIO: ...
+    def convert_to_jpg() -> BytesIO: ...
 
 
 class PNGs(Imgs):
@@ -18,4 +18,4 @@ class PNGs(Imgs):
         'pdf'
     ]
 
-    def convert_to_pdf(self) -> io.BytesIO: ...
+    def convert_to_pdf(self) -> BytesIO: ...
