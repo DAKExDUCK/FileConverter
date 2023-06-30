@@ -36,7 +36,7 @@ class Document:
                 stdout=subprocess.PIPE
             )
             if result.stderr != b'':
-                raise "Error while converting file"
+                raise BaseException("Error while converting file")
 
             with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+conversion_type, 'rb') as tmp_file:
                 return BytesIO(tmp_file.read())
@@ -50,7 +50,7 @@ class Document:
             stdout=subprocess.PIPE
         )
         if result.stderr != b'':
-            raise "Error while converting file"
+            raise BaseException("Error while converting file")
         
         with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
             return BytesIO(tmp_file.read())
