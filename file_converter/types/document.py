@@ -30,31 +30,34 @@ class Document:
             filepath = TFM.write_tmp_file(self.doc, self.format)
             outdir = filepath.split('.')[0]
             cmd = ['soffice', '--headless', '--convert-to', conversion_type, '--outdir', outdir, filepath]
-            subprocess.call(
+            result = subprocess.run(
                 cmd,
                 stderr=subprocess.PIPE,
                 stdout=subprocess.PIPE
             )
+            if result.stderr != b'':
+                raise "Error while converting file"
+
             with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+conversion_type, 'rb') as tmp_file:
                 return io.BytesIO(tmp_file.read())
         return conversion_func
 
-    def _convert(filepath:str, outdir:str, format:str):
+    def _convert(self, filepath:str, outdir:str, format:str):
         cmd = ['soffice', '--headless', '--convert-to', format, '--outdir', outdir, filepath]
-        subprocess.call(
+        return subprocess.run(
             cmd,
             stderr=subprocess.PIPE,
             stdout=subprocess.PIPE
         )
+        # with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
+            # return io.BytesIO(tmp_file.read())
 
     def convert_to(self, format:str):
         format = format.lower()
-        if format not in self.can_converts_to:
-            raise ValueError("Invalid format type")
+        # if format not in self.can_converts_to:
+            # raise ValueError("Invalid format type")
 
-        output = io.BytesIO()
-        tmp_filename = TFM.write_tmp_file(self.doc)
+        tmp_filename = TFM.write_tmp_file(self.doc, self.format)
         outdir = tmp_filename.split('.')[0]
-        self._convert(TFM.tmp_dir+tmp_filename, outdir, format)
-        return output
+        return self._convert(tmp_filename, outdir, format)
     
