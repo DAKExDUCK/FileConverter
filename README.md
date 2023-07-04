@@ -18,9 +18,19 @@ For now support:
 
 
 #### Preparation
-1. Install `libreoffice` package
-2. Copy [file_converter](https://github.com/DAKExDUCK/FileConverter/tree/main/file_converter)
-4. Install requirements
+1. Install `libreoffice` Linux package:
+    - Arch:
+    ```bash
+    yay -S libreoffice
+    ```
+    - Ubuntu, RedHat:
+    ```bash
+    sudo apt install libreoffice
+    ```
+2. Install `multi-file-converter`:
+    ```bash
+    pip install multi-file-converter
+    ```
 
 #### Usage
 
