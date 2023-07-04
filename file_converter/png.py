@@ -10,6 +10,7 @@ class PNG(Img):
         'bmp',
         'tiff'
     ]
+    format = 'png'
 
     def convert_to_pdf() -> BytesIO: ...
     def convert_to_jpg() -> BytesIO: ...

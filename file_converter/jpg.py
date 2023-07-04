@@ -12,6 +12,7 @@ class JPG(Img):
         'bmp',
         'tiff'
     ]
+    format = 'jpeg'
 
     def __init__(self, img_or_path: str | Image.Image | BytesIO) -> None:
         super().__init__(img_or_path)
