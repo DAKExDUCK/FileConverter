@@ -17,7 +17,7 @@ setup(
   install_requires=['Pillow>=10.0.0'],
   classifiers=[
     'Programming Language :: Python :: 3.10',
-    'Operating System :: OS Linux'
+    'Operating System :: POSIX :: Linux'
   ],
   keywords='',
   project_urls={
