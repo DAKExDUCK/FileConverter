@@ -5,7 +5,7 @@ def readme():
     return f.read()
 
 setup(
-  name='file_converter',
+  name='multi_file_converter',
   version='1.0.0',
   author='dake_duck',
   author_email='arsengabdulin228@gmail.com',
