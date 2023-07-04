@@ -5,7 +5,7 @@ from file_converter.types.document import Document
 
 class PDF(Document):
     can_converts_to = [
-        'docx'
+        'html'
     ]
     format = 'pdf'
 

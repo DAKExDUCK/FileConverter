@@ -6,11 +6,15 @@ from file_converter.types.image import Img, Imgs
 class PNG(Img):
     can_converts_to = [
         'pdf',
-        'jpg'
+        'jpg',
+        'bmp',
+        'tiff'
     ]
 
     def convert_to_pdf() -> BytesIO: ...
     def convert_to_jpg() -> BytesIO: ...
+    def convert_to_bmp() -> BytesIO: ...
+    def convert_to_tiff() -> BytesIO: ...
 
 
 class PNGs(Imgs):
