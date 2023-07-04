@@ -1,6 +1,7 @@
-from io import BytesIO
 import subprocess
+from io import BytesIO
 
+from file_converter.exceptions import ErrorConvertFile
 from file_converter.utils.tmp_file_manager import TmpFileManager as TFM
 
 
@@ -9,7 +10,7 @@ class Document:
     format: str
     doc: BytesIO
 
-    def __init__(self, bytes_or_path: str|BytesIO):
+    def __init__(self, bytes_or_path: str|BytesIO) -> None:
         if isinstance(bytes_or_path, str):
             with open(bytes_or_path, 'rb') as file:
                 self.doc = BytesIO(file.read())
@@ -20,7 +21,7 @@ class Document:
         
         self._create_conversion_functions()
 
-    def _create_conversion_functions(self):
+    def _create_conversion_functions(self) -> None:
         for conversion_type in self.can_converts_to:
             conversion_func_name = f'convert_to_{conversion_type}'
             setattr(self, conversion_func_name, self._create_conversion_func(conversion_type))
@@ -36,7 +37,7 @@ class Document:
                 stdout=subprocess.PIPE
             )
             if result.stderr != b'':
-                raise BaseException("Error while converting file")
+                raise ErrorConvertFile(message_exc=result.stderr.decode("utf-8"))
 
             with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+conversion_type, 'rb') as tmp_file:
                 return BytesIO(tmp_file.read())
@@ -50,7 +51,7 @@ class Document:
             stdout=subprocess.PIPE
         )
         if result.stderr != b'':
-            raise BaseException("Error while converting file")
+            raise ErrorConvertFile(message_exc=result.stderr.decode("utf-8"))
         
         with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
             return BytesIO(tmp_file.read())
