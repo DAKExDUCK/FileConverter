@@ -1,8 +1,27 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-setup(name='file_converter',
-      version='0.1',
-      description='Simple way to convert files to another formats',
-      packages=['file_converter'],
-      author_email='arsengadbulin228@gmail.com',
-      zip_safe=False)
+def readme():
+  with open('README.md', 'r') as f:
+    return f.read()
+
+setup(
+  name='file_converter',
+  version='1.0.0',
+  author='dake_duck',
+  author_email='arsengabdulin228@gmail.com',
+  description='Simple way to convert files to another formats',
+  long_description=readme(),
+  long_description_content_type='text/markdown',
+  url='https://github.com/DAKExDUCK/FileConverter',
+  packages=find_packages(),
+  install_requires=['Pillow>=10.0.0'],
+  classifiers=[
+    'Programming Language :: Python :: 3.10',
+    'Operating System :: OS Linux'
+  ],
+  keywords='',
+  project_urls={
+    'GutHub': 'https://github.com/DAKExDUCK/FileConverter'
+  },
+  python_requires='>=3.10'
+)
