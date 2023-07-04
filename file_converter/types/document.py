@@ -37,7 +37,7 @@ class Document:
                 stdout=subprocess.PIPE
             )
             if result.stderr != b'':
-                raise ErrorConvertFile(message_exc=result.stderr.decode("utf-8"))
+                raise ErrorConvertFile(result.stderr.decode("utf-8"))
 
             with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+conversion_type, 'rb') as tmp_file:
                 return BytesIO(tmp_file.read())
@@ -51,7 +51,7 @@ class Document:
             stdout=subprocess.PIPE
         )
         if result.stderr != b'':
-            raise ErrorConvertFile(message_exc=result.stderr.decode("utf-8"))
+            raise ErrorConvertFile(result.stderr.decode("utf-8"))
         
         with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
             return BytesIO(tmp_file.read())

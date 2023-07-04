@@ -7,6 +7,7 @@ from file_converter.exceptions import ErrorConvertFile
 
 class Img:
     can_converts_to: list
+    format: str
     img: Image.Image
 
     def __init__(self, img_or_path: str|Image.Image|BytesIO) -> None:
@@ -29,9 +30,11 @@ class Img:
             format = 'JPEG' if conversion_type == 'jpg' else conversion_type.upper()
             output = BytesIO()
             try:
+                if format == 'JPEG':
+                    self.img = self.img.convert('RGB')
                 self.img.save(output, format=format)
             except Exception as exc:
-                raise ErrorConvertFile(message_exc=str(exc))
+                raise ErrorConvertFile(str(exc))
             else:
                 return output
         return conversion_func
@@ -43,9 +46,11 @@ class Img:
         
         output = BytesIO()
         try:
+            if format == 'JPEG':
+                self.img = self.img.convert('RGB')
             self.img.save(output, format=format)
         except Exception as exc:
-            raise ErrorConvertFile(message_exc=str(exc))
+            raise ErrorConvertFile(str(exc))
         else:
             return output
     

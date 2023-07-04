@@ -1,4 +1,3 @@
-from io import BytesIO
 
 
 class ErrorConvertFile(Exception):
@@ -9,7 +8,6 @@ class ErrorConvertFile(Exception):
         message -- explanation of the error
     """
 
-    def __init__(self, message_exc: str, message="Error while converting file"):
-        self.message_exc = message_exc
-        self.message = message
+    def __init__(self, message: str):
+        self.message = f"Error while converting file - {message}"
         super().__init__(self.message)
