@@ -1,7 +1,7 @@
-from file_converter.jpg import JPG, JPGs
-from file_converter.pdf import PDF
-from file_converter.png import PNG, PNGs
-from file_converter.docx import DOCX
+from .jpg import JPG, JPGs
+from .pdf import PDF
+from .png import PNG, PNGs
+from .docx import DOCX
 
 
 __all__ = [

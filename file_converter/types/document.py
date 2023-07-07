@@ -1,8 +1,8 @@
 import subprocess
 from io import BytesIO
 
-from file_converter.exceptions import ErrorConvertFile
-from file_converter.utils.tmp_file_manager import TmpFileManager as TFM
+from ..exceptions import ErrorConvertFile
+from ..utils.tmp_file_manager import TmpFileManager as TFM
 
 
 class Document:

@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from file_converter.types.document import Document
+from .types.document import Document
 
 
 class PDF(Document):

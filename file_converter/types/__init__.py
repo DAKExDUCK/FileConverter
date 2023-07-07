@@ -1,5 +1,5 @@
-from file_converter.types.document import Document
-from file_converter.types.image import Img, Imgs
+from .document import Document
+from .image import Img, Imgs
 
 
 __all__ = [

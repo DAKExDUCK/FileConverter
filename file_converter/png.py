@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from file_converter.types.image import Img, Imgs
+from .types.image import Img, Imgs
 
 
 class PNG(Img):

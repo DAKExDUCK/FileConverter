@@ -2,7 +2,7 @@ from io import BytesIO
 
 from PIL import Image
 
-from file_converter.types.image import Img, Imgs
+from .types.image import Img, Imgs
 
 
 class JPG(Img):

@@ -2,7 +2,7 @@ from copy import deepcopy
 from io import BytesIO
 from PIL import Image
 
-from file_converter.exceptions import ErrorConvertFile
+from ..exceptions import ErrorConvertFile
 
 
 class Img:
