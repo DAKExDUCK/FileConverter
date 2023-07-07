@@ -25,7 +25,7 @@ class JPG(Img):
 
 
 class JPGs(Imgs):
-    converts_to = [
+    can_converts_to = [
         'pdf'
     ]
 

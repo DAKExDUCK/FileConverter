@@ -19,7 +19,7 @@ class PNG(Img):
 
 
 class PNGs(Imgs):
-    converts_to = [
+    can_converts_to = [
         'pdf'
     ]
 
