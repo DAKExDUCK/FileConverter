@@ -21,7 +21,7 @@ setup(
   ],
   keywords='',
   project_urls={
-    'GutHub': 'https://github.com/DAKExDUCK/FileConverter'
+    'GitHub': 'https://github.com/DAKExDUCK/FileConverter'
   },
   python_requires='>=3.10'
 )
