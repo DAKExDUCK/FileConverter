@@ -30,4 +30,8 @@ class JPGs(Imgs):
     ]
     format = 'jpeg'
 
+    def __init__(self, imgs_or_paths: list[str|Image.Image|BytesIO]) -> None:
+        self.imgs = [ JPG(_) for _ in imgs_or_paths ]
+        self._create_conversion_functions()
+    
     def convert_to_pdf(self) -> BytesIO: ...
