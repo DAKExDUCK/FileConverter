@@ -28,5 +28,6 @@ class JPGs(Imgs):
     can_converts_to = [
         'pdf'
     ]
+    format = 'jpeg'
 
     def convert_to_pdf(self) -> BytesIO: ...
