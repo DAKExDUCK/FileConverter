@@ -15,10 +15,10 @@ __all__ = [
 
 
 def define_class_for_format(key:str):
-    if key.upper() not in __all__:
+    if key not in __all__:
         return None
     
-    index = __all__.index(key.upper())
+    index = __all__.index(key)
     name = __all__[index]
     obj = globals().get(name)
     if isinstance(obj, type):
