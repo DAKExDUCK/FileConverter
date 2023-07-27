@@ -40,7 +40,9 @@ class Document:
                 raise ErrorConvertFile(result.stderr.decode("utf-8"))
 
             with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+conversion_type, 'rb') as tmp_file:
-                return BytesIO(tmp_file.read())
+                output = BytesIO(tmp_file.read())
+                output.seek(0)
+                return output
         return conversion_func
 
     def _convert(self, filepath:str, outdir:str, format:str) -> BytesIO:
@@ -54,7 +56,9 @@ class Document:
             raise ErrorConvertFile(result.stderr.decode("utf-8"))
         
         with open(outdir+'/'+filepath.split('/')[-1].split('.')[0]+'.'+format, 'rb') as tmp_file:
-            return BytesIO(tmp_file.read())
+            output = BytesIO(tmp_file.read())
+            output.seek(0)
+            return output
 
     def convert_to(self, format:str) -> BytesIO:
         format = format.lower()
