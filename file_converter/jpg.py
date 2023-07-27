@@ -7,7 +7,6 @@ from .types.image import Img, Imgs
 
 class JPG(Img):
     can_converts_to = [
-        'pdf',
         'png',
         'bmp',
         'tiff'

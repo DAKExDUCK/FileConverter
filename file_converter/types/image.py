@@ -67,10 +67,10 @@ class Imgs:
     def _create_conversion_func(self, conversion_type):
         def conversion_func() -> BytesIO:
             format = conversion_type.upper()
-            tmp_imgs = deepcopy(self.imgs)
+            tmp_imgs = [ _.img for _ in self.imgs ]
             output = BytesIO()
             img = tmp_imgs.pop(0)
-            img.save(output, save_all=True, append_images=tmp_imgs, format=format)
+            img.img.save(output, save_all=True, append_images=tmp_imgs, format=format)
             return output
         return conversion_func
     
