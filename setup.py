@@ -6,7 +6,7 @@ def readme():
 
 setup(
   name='multi_file_converter',
-  version='1.0.7',
+  version='1.0.8',
   author='dake_duck',
   author_email='arsengabdulin228@gmail.com',
   description='Simple way to convert files to another formats',

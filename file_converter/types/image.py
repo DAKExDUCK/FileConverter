@@ -36,11 +36,12 @@ class Img:
             except Exception as exc:
                 raise ErrorConvertFile(str(exc))
             else:
+                output.seek(0)
                 return output
         return conversion_func
     
     def convert_to(self, format:str) -> BytesIO:
-        format = 'JPEG' if format == 'jpg' else format.upper()
+        format = 'JPEG' if format.lower() == 'jpg' else format.upper()
         # if format not in self.can_converts_to:
         #     raise ValueError("Invalid format type")
         
@@ -52,6 +53,7 @@ class Img:
         except Exception as exc:
             raise ErrorConvertFile(str(exc))
         else:
+            output.seek(0)
             return output
     
 
@@ -70,7 +72,7 @@ class Imgs:
             tmp_imgs = [ _.img for _ in self.imgs ]
             output = BytesIO()
             img = tmp_imgs.pop(0)
-            img.img.save(output, save_all=True, append_images=tmp_imgs, format=format)
+            img.save(output, save_all=True, append_images=tmp_imgs, format=format)
             return output
         return conversion_func
     
@@ -78,7 +80,7 @@ class Imgs:
         if format.lower() not in self.can_converts_to:
             raise ValueError("Invalid format type")
         
-        tmp_imgs = deepcopy(self.imgs)
+        tmp_imgs = [ _.img for _ in self.imgs ]
         output = BytesIO()
         img = tmp_imgs.pop(0)
         img.save(output, save_all=True, append_images=tmp_imgs, format=format.upper())
